@@ -1,0 +1,5 @@
+export const FB_API_KEY = "AIzaSyCZLWVwyg4dnTcWWotXpqYfn-RF02mX4r4"
+export const FB_AUTH_DOMAIN = "pairachute-5adf4.firebaseapp.com"
+export const FB_DATABASE_URL = "https://pairachute-5adf4.firebaseio.com"
+export const FB_STORAGE_BUCKET = "pairachute-5adf4.appspot.com"
+export const FB_MESSAGING_SENDER_ID = "803241803289"
