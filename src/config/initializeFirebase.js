@@ -1,13 +1,13 @@
 import * as firebase from 'firebase';
-import * from './secrets'
+import * as secrets from './secrets'
 
 // Initialize Firebase
 const firebaseConfig = {
-  apiKey: FB_API_KEY,
-  authDomain: FB_AUTH_DOMAIN,
-  databaseURL: FB_DATABASE_URL,
-  storageBucket: FB_STORAGE_BUCKET,
-  messagingSenderId: FB_MESSAGING_SENDER_ID,
+  apiKey: secrets.FB_API_KEY,
+  authDomain: secrets.FB_AUTH_DOMAIN,
+  databaseURL: secrets.FB_DATABASE_URL,
+  storageBucket: secrets.FB_STORAGE_BUCKET,
+  messagingSenderId: secrets.FB_MESSAGING_SENDER_ID,
 };
 
 const fb = firebase.initializeApp(firebaseConfig);

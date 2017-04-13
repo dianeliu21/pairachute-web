@@ -1,0 +1,23 @@
+.prompt-wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.prompt-input-container {
+  width: 50%;
+}
+
+.prompt-input {
+  font-size: 1em;
+  height: 200px;
+  padding: 1%;
+  width: 100%;
+}
+
+.prompt-submit {
+  display: block;
+  float: right;
+  font-size: 1em;
+  padding: 5px;
+}
