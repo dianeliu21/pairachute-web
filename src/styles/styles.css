@@ -1,3 +1,17 @@
+.add-prompt-response {
+  background-color: inherit;
+  border: none;
+  float: left;
+}
+
+.prompt-response {
+  border: 1px solid gray;
+  height: 25px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  width: 100%;
+}
+
 .prompt-wrapper {
   align-items: center;
   display: flex;
@@ -10,7 +24,7 @@
 
 .prompt-input {
   font-size: 1em;
-  height: 200px;
+  height: 150px;
   padding: 1%;
   width: 100%;
 }

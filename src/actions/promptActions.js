@@ -2,8 +2,8 @@ import * as types from './actionTypes';
 import fb from '../config/initializeFirebase';
 var db = fb.database();
 
-export function sendPrompt(prompt) {
-  return async function(dispatch) {
+export function sendPrompt(prompt, promptResponses) {
+  return async function (dispatch) {
     try {
       dispatch(sendPromptAttempt())
 
@@ -11,6 +11,7 @@ export function sendPrompt(prompt) {
       var newPromptKey = db.ref('/prompts').push().key
       var promptData = {
         prompt: prompt,
+        promptResponses: promptResponses,
         timestamp: Date.now(),
         recipients: 'all',
       }
@@ -21,6 +22,7 @@ export function sendPrompt(prompt) {
       // insert new prompt message into each message thread
       var newPromptMessage = {
         message: prompt,
+        responses: promptResponses,
         sender_id: 'prompt',
         timestamp: Date.now()
       }

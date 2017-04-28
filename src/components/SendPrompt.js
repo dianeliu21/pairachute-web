@@ -1,40 +1,61 @@
-import React, { Component } from 'react';
-import '../styles/styles.css';
+import React, { Component } from 'react'
+import '../styles/styles.css'
 
 class SendPrompt extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
+      promptResponses: [],
+      promptResponseTexts: {},
       promptText: ''
     }
 
-    this._handleChange = this._handleChange.bind(this);
-    this._submitForm = this._submitForm.bind(this);
+    this._addAdditionalInputs = this._addAdditionalInputs.bind(this)
+    this._handleChange = this._handleChange.bind(this)
+    this._handleAdditionalInputChange = this._handleAdditionalInputChange.bind(this)
+    this._submitForm = this._submitForm.bind(this)
   }
 
-  _handleChange(event) {
+  _addAdditionalInputs (event) {
+    var newInput = `input${this.state.promptResponses.length}`
+    this.setState({promptResponses: this.state.promptResponses.concat([newInput])})
+
+    const additionalTexts = this.state.promptResponseTexts
+    additionalTexts[newInput] = ''
+    this.setState({promptResponseTexts: additionalTexts})
+  }
+
+  _handleChange (event) {
     this.setState({promptText: event.target.value})
   }
 
-  _submitForm(event) {
-    this.props.sendPrompt(this.state.promptText)
-    event.preventDefault();
-    this.setState({promptText: ''})
+  _handleAdditionalInputChange (event) {
+    const additionalTexts = this.state.promptResponseTexts
+    additionalTexts[event.target.name] = event.target.value
+    this.setState({promptResponseTexts: additionalTexts})
   }
 
-  render() {
-    return(
+  _submitForm (event) {
+    this.props.sendPrompt(this.state.promptText, this.state.promptResponseTexts)
+    event.preventDefault()
+    this.setState({promptResponses: [], promptResponseTexts: {}, promptText: ''})
+  }
+
+  render () {
+    return (
       <div className="prompt-wrapper">
         <h2>Send a new prompt to all Pairachute pairs:</h2>
         <div className="prompt-input-container">
           <form onSubmit={this._submitForm}>
             <textarea value={this.state.promptText} className="prompt-input" name="prompt" rows="5" onChange={this._handleChange}></textarea>
-            <input className="prompt-submit" type="submit" value="Send"/>
+            <input className="add-prompt-response" type="button" value="+ Add response options" onClick={this._addAdditionalInputs} />
+            {this.state.promptResponses.map(i => <input className="prompt-response" type="text" key={i} name={i} value={this.state.promptResponseTexts[i]} onChange={this._handleAdditionalInputChange} />)}
+            <input className="prompt-submit" type="submit" value="Send" />
           </form>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default SendPrompt;
+export default SendPrompt

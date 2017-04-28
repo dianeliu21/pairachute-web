@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import '../styles/App.css';
+import React, { Component } from 'react'
+import '../styles/App.css'
 
-import SendPromptContainer from './SendPromptContainer';
+import SendPromptContainer from './SendPromptContainer'
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <div className="App">
         <h1>Pairachute</h1>
-        <SendPromptContainer/>
+        <SendPromptContainer />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

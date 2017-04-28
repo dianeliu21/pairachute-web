@@ -1,7 +1,7 @@
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { sendPrompt } from '../actions/promptActions';
-import SendPrompt from './SendPrompt';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { sendPrompt } from '../actions/promptActions'
+import SendPrompt from './SendPrompt'
 
 const mapStateToProps = (state) => {
   return {
@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     sendPrompt
-  }, dispatch);
+  }, dispatch)
 }
 
 const SendPromptContainer = connect(
@@ -20,4 +20,4 @@ const SendPromptContainer = connect(
   mapDispatchToProps
 )(SendPrompt)
 
-export default SendPromptContainer;
+export default SendPromptContainer
