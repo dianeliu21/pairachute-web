@@ -1,8 +1,8 @@
-import * as types from './actionTypes';
-import fb from '../config/initializeFirebase';
-var db = fb.database();
+import * as types from './actionTypes'
+import fb from '../config/initializeFirebase'
+var db = fb.database()
 
-export function sendPrompt(prompt, promptResponses) {
+export function sendPrompt (prompt, promptResponses) {
   return async function (dispatch) {
     try {
       dispatch(sendPromptAttempt())
@@ -13,7 +13,7 @@ export function sendPrompt(prompt, promptResponses) {
         prompt: prompt,
         promptResponses: promptResponses,
         timestamp: Date.now(),
-        recipients: 'all',
+        recipients: 'all'
       }
 
       var updates = {}
@@ -23,7 +23,7 @@ export function sendPrompt(prompt, promptResponses) {
       var newPromptMessage = {
         message: prompt,
         responses: promptResponses,
-        sender_id: 'prompt',
+        senderId: 'prompt',
         timestamp: Date.now()
       }
       // get all thread_ids
