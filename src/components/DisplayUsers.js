@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { ListGroup } from 'react-bootstrap'
 import '../styles/styles.css'
 import UserRow from './UserRow'
 
@@ -27,13 +28,19 @@ class DisplayUsers extends Component {
     return (
       <div>
         <h2>Current Users ({this.props.users.totalCount})</h2>
-        <div>
-          <h3>Paired Users ({this.props.users.pairedCount})</h3>
-          {this._renderUsers('paired')}
-        </div>
-        <div>
-          <h3>Unpaired Users ({this.props.users.unpairedCount})</h3>
-          {this._renderUsers('unpaired')}
+        <div className="flex-row">
+          <div className="user-column">
+            <h3>Paired Users ({this.props.users.pairedCount})</h3>
+            <ListGroup>
+              {this._renderUsers('paired')}
+            </ListGroup>
+          </div>
+          <div className="user-column">
+            <h3>Unpaired Users ({this.props.users.unpairedCount})</h3>
+            <ListGroup>
+              {this._renderUsers('unpaired')}
+            </ListGroup>
+          </div>
         </div>
       </div>
     )
