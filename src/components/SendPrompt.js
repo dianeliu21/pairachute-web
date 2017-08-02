@@ -44,7 +44,7 @@ class SendPrompt extends Component {
   render () {
     return (
       <div className="prompt-wrapper">
-        <h2>Send a new prompt to all Pairachute pairs:</h2>
+        <h3>Send a new prompt to all Pairachute pairs:</h3>
         <div className="prompt-input-container">
           <form onSubmit={this._submitForm}>
             <textarea value={this.state.promptText} className="prompt-input" name="prompt" rows="5" onChange={this._handleChange}></textarea>

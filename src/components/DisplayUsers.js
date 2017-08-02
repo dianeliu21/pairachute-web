@@ -27,7 +27,7 @@ class DisplayUsers extends Component {
   render () {
     return (
       <div>
-        <h2>Current Users ({this.props.users.totalCount})</h2>
+        <h3>Current Users ({this.props.users.totalCount})</h3>
         <div className="flex-row">
           <div className="user-column">
             <h3>Paired Users ({this.props.users.pairedCount})</h3>

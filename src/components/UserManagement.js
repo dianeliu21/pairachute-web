@@ -57,6 +57,7 @@ class UserManagement extends Component {
   render () {
     return (
       <div>
+        <h2>Users</h2>
         <DisplayUsers users={this.state.users}/>
       </div>
     )
