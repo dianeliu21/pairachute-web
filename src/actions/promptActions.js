@@ -5,7 +5,7 @@ var db = fb.database()
 export function sendPrompt (prompt, promptResponses) {
   return async function (dispatch) {
     try {
-      dispatch(sendPromptAttempt())
+      dispatch({type: types.SEND_PROMPT_ATTEMPT})
 
       // insert new prompt into /prompts/
       var newPromptKey = db.ref('/prompts').push().key
@@ -22,7 +22,7 @@ export function sendPrompt (prompt, promptResponses) {
       // insert new prompt message into each message thread
       var newPromptMessage = {
         message: prompt,
-        responses: promptResponses,
+        responseOptions: promptResponses,
         senderId: 'prompt',
         timestamp: Date.now()
       }
@@ -40,30 +40,11 @@ export function sendPrompt (prompt, promptResponses) {
         }
         console.log(updates)
         await db.ref().update(updates)
-        dispatch(sendPromptSuccess(promptData))
+        dispatch({type: types.SEND_PROMPT_SUCCESS, promptData})
       })
     } catch(err) {
       console.log(err)
-      dispatch(sendPromptFailure())
+      dispatch({type: types.SEND_PROMPT_FAILURE})
     }
-  }
-}
-
-function sendPromptAttempt(promptData) {
-  return {
-    type: types.SEND_PROMPT_ATTEMPT,
-    promptData
-  }
-}
-
-function sendPromptSuccess() {
-  return {
-    type: types.SEND_PROMPT_SUCCESS
-  }
-}
-
-function sendPromptFailure() {
-  return {
-    type: types.SEND_PROMPT_FAILURE
   }
 }

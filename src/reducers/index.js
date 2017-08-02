@@ -1,8 +1,10 @@
-import { combineReducers } from 'redux';
-import * as promptReducers from './promptReducers';
+import { combineReducers } from 'redux'
+import { sentPrompts } from './promptReducers'
+import { userInfo } from './userReducers'
 
 const reducer = combineReducers({
-  promptReducers,
+  sentPrompts,
+  userInfo
 });
 
 export default reducer;
