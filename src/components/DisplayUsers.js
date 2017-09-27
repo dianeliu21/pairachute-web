@@ -15,30 +15,30 @@ class DisplayUsers extends Component {
   _renderUsers (status) {
     var users = []
     if (status === 'paired') {
-      users = Object.entries(this.props.users.pairedUsers)
-    } else if (status === 'unpaired') {
-      users = Object.entries(this.props.users.unpairedUsers)
+      users = Object.entries(this.props.users.pairedReflectionUsers)
+    } else if (status === 'solo') {
+      users = Object.entries(this.props.users.soloReflectionUsers)
     }
     return users.map(item =>
-      (<UserRow first_name={item[1].first_name} last_name={item[1].last_name}/>)
+      (<UserRow key={item[0]} first_name={item[1].first_name} last_name={item[1].last_name}/>)
     )
   }
 
   render () {
     return (
       <div>
-        <h3>Current Users ({this.props.users.totalCount})</h3>
+        <h3>All Users ({this.props.users.totalCount})</h3>
         <div className="flex-row">
           <div className="user-column">
-            <h3>Paired Users ({this.props.users.pairedCount})</h3>
+            <h3>Paired Reflection Users ({this.props.users.pairedReflectionCount})</h3>
             <ListGroup>
               {this._renderUsers('paired')}
             </ListGroup>
           </div>
           <div className="user-column">
-            <h3>Unpaired Users ({this.props.users.unpairedCount})</h3>
+            <h3>Solo Reflection Users ({this.props.users.soloReflectionCount})</h3>
             <ListGroup>
-              {this._renderUsers('unpaired')}
+              {this._renderUsers('solo')}
             </ListGroup>
           </div>
         </div>

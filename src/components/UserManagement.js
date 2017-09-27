@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import '../styles/styles.css'
-import DisplayUsers from './DisplayUsers'
+import DisplayPairs from './DisplayPairs'
 
 class UserManagement extends Component {
   constructor (props) {
     super(props)
     this.state = {
       users: {
-        pairedUsers: {},
-        unpairedUsers: {},
+        soloReflectionUsers: {},
+        pairedReflectionUsers: {},
         totalCount: 0,
-        pairedCount: 0,
-        unpairedCount: 0
+        soloReflectionCount: 0,
+        pairedReflectionCount: 0,
       }
     }
 
@@ -25,31 +25,31 @@ class UserManagement extends Component {
   componentWillReceiveProps (nextProps) {
     if (this.props !== nextProps) {
       if (nextProps.userInfo.users) {
-        this._sortUsers(nextProps)
+        this._sortUsers(nextProps.userInfo.users)
       }
     }
   }
 
-  _sortUsers (nextProps) {
+  _sortUsers (users) {
     var userObj = {
-      pairedUsers: {},
-      unpairedUsers: {},
+      soloReflectionUsers: {},
+      pairedReflectionUsers: {},
       totalCount: 0,
-      pairedCount: 0,
-      unpairedCount: 0
+      soloReflectionCount: 0,
+      pairedReflectionCount: 0,
     }
 
-    for (var user_id in nextProps.userInfo.users) {
-      if (nextProps.userInfo.users[user_id].pair_id) {
-        userObj.pairedUsers[user_id] = nextProps.userInfo.users[user_id]
+    for (var user_id in users) {
+      if (users[user_id].reflection_type === 'paired') {
+        userObj.pairedReflectionUsers[user_id] = users[user_id]
       } else {
-        userObj.unpairedUsers[user_id] = nextProps.userInfo.users[user_id]
+        userObj.soloReflectionUsers[user_id] = users[user_id]
       }
     }
 
-    userObj.pairedCount = Object.keys(userObj.pairedUsers).length
-    userObj.unpairedCount = Object.keys(userObj.unpairedUsers).length
-    userObj.totalCount = userObj.pairedCount + userObj.unpairedCount
+    userObj.pairedReflectionCount = Object.keys(userObj.pairedReflectionUsers).length
+    userObj.soloReflectionCount = Object.keys(userObj.soloReflectionUsers).length
+    userObj.totalCount = userObj.pairedReflectionCount + userObj.soloReflectionCount
 
     this.setState({users: userObj})
   }
@@ -57,8 +57,7 @@ class UserManagement extends Component {
   render () {
     return (
       <div>
-        <h2>Users</h2>
-        <DisplayUsers users={this.state.users}/>
+        <DisplayPairs users={this.state.users}/>
       </div>
     )
   }
