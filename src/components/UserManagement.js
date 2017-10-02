@@ -40,7 +40,7 @@ class UserManagement extends Component {
     }
 
     for (var user_id in users) {
-      if (users[user_id].reflection_type === 'paired') {
+      if (users[user_id].reflectionType === 'paired') {
         userObj.pairedReflectionUsers[user_id] = users[user_id]
       } else {
         userObj.soloReflectionUsers[user_id] = users[user_id]

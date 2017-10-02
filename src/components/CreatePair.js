@@ -70,7 +70,7 @@ class CreatePair extends Component {
     }
 
     for (var user_id in users) {
-      if (users[user_id].reflection_type === 'paired') {
+      if (users[user_id].reflectionType === 'paired') {
         if (!users[user_id].isPaired) {
           userObj.pairedReflectionUsers[user_id] = users[user_id]
         }

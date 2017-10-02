@@ -28,9 +28,10 @@ export function createUser (firstName, lastName, emailAddress, reflectionType) {
         first_name: firstName,
         last_name: lastName,
         email: emailAddress,
-        reflection_type: reflectionType,
+        reflectionType: reflectionType,
         threads: {},
         isPaired: false,
+        showWelcome: true,
       }
       if (reflectionType === 'solo') {
         var threadKey = db.ref('threads').push().key
