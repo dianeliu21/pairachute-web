@@ -25,8 +25,9 @@ export function createUser (firstName, lastName, emailAddress, reflectionType) {
 
       var updates = {}
       var newUserInfo = {
-        first_name: firstName,
-        last_name: lastName,
+        displayName: firstName + ' ' + lastName,
+        firstName: firstName,
+        lastName: lastName,
         email: emailAddress,
         reflectionType: reflectionType,
         threads: {},
@@ -35,15 +36,15 @@ export function createUser (firstName, lastName, emailAddress, reflectionType) {
       }
       if (reflectionType === 'solo') {
         var threadKey = db.ref('threads').push().key
-        newUserInfo.threads[threadKey] = true
+        newUserInfo.threads['reflectionOnly'] = threadKey
       }
       updates['/users/' + response.uid] = newUserInfo
       var threadInfo = {
-        type: 'reflection_only',
+        type: 'reflectionOnly',
         isReflection: true,
         users: {}
       }
-      threadInfo.users[response.uid] = true
+      threadInfo.users[response.uid] = firstName + ' ' + lastName
       updates['/threads/' + threadKey] = threadInfo
 
       await db.ref().update(updates)
@@ -63,38 +64,37 @@ export function createPair (user1, user2, reflectionType) {
       let user2Obj = (await db.ref('/users/' + user2).once('value')).val()
 
       var user1Info = Object.assign({}, user1Obj, {
-        threads: {},
         isPaired: true,
         pairId: user2
       })
       var user2Info = Object.assign({}, user2Obj, {
-        threads: {},
         isPaired: true,
         pairId: user1
       })
 
       let threadKey = await db.ref('threads').push().key
-      user1Info.threads[threadKey] = true
-      user2Info.threads[threadKey] = true
-
-      updates['/users/' + user1] = user1Info
-      updates['/users/' + user2] = user2Info
-
       var threadInfo = {
         type: '',
         isReflection: null,
         users: {}
       }
-      threadInfo.users[user1] = true
-      threadInfo.users[user2] = true
+
+      threadInfo.users[user1] = user1Obj.displayName
+      threadInfo.users[user2] = user2Obj.displayName
       if (reflectionType === 'solo') {
-        threadInfo.type = 'chat_only'
+        threadInfo.type = 'chatOnly'
         threadInfo.isReflection = false
+        user1Info.threads['chatOnly'] = threadKey
+        user2Info.threads['chatOnly'] = threadKey
       } else {
-        threadInfo.type = 'reflection_and_chat'
+        threadInfo.type = 'reflectionAndChat'
         threadInfo.isReflection = true
+        user1Info.threads['reflectionAndChat'] = threadKey
+        user2Info.threads['reflectionAndChat'] = threadKey
       }
 
+      updates['/users/' + user1] = user1Info
+      updates['/users/' + user2] = user2Info
       updates['/threads/' + threadKey] = threadInfo
       await db.ref().update(updates)
       dispatch(createPairSuccess('Successfully created new pair!'))

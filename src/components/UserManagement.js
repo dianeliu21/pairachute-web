@@ -40,6 +40,7 @@ class UserManagement extends Component {
     }
 
     for (var user_id in users) {
+      console.log('this is user', user_id, users)
       if (users[user_id].reflectionType === 'paired') {
         userObj.pairedReflectionUsers[user_id] = users[user_id]
       } else {

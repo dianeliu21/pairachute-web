@@ -20,7 +20,7 @@ class DisplayUsers extends Component {
       users = Object.entries(this.props.users.soloReflectionUsers)
     }
     return users.map(item =>
-      (<UserRow key={item[0]} first_name={item[1].first_name} last_name={item[1].last_name}/>)
+      (<UserRow key={item[0]} firstName={item[1].firstName} lastName={item[1].lastName}/>)
     )
   }
 

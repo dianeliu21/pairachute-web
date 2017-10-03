@@ -20,7 +20,7 @@ class DisplayPairs extends Component {
     var isPaired = status === 'paired'
     return users.map(item =>
      item[1].isPaired === isPaired
-      ? (<UserRow key={item[0]} first_name={item[1].first_name} last_name={item[1].last_name}/>)
+      ? (<UserRow key={item[0]} firstName={item[1].firstName} lastName={item[1].lastName}/>)
       : null
     )
   }

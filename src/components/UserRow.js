@@ -8,7 +8,7 @@ class UserRow extends Component {
     return (
       <div>
         <ListGroupItem>
-          {this.props.first_name} {this.props.last_name}
+          {this.props.firstName} {this.props.lastName}
           {this.props.pair_name && `Pair: ${this.props.pair_name}`}
         </ListGroupItem>
       </div>

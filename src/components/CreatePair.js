@@ -89,7 +89,7 @@ class CreatePair extends Component {
       : this.state.soloReflectionUsers
 
     return Object.entries(users).map((item) =>
-      (<option key={item[0]} name={name} value={item[0]}>{item[1].first_name} {item[1].last_name}</option>)
+      (<option key={item[0]} name={name} value={item[0]}>{item[1].firstName} {item[1].lastName}</option>)
     )
   }
 
