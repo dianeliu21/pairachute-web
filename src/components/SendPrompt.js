@@ -5,40 +5,41 @@ class SendPrompt extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      promptResponses: [],
-      promptResponseTexts: {},
+      // promptResponses: [],
+      // promptResponseTexts: {},
       promptText: ''
     }
 
-    this._addAdditionalInputs = this._addAdditionalInputs.bind(this)
+    // this._addAdditionalInputs = this._addAdditionalInputs.bind(this)
     this._handleChange = this._handleChange.bind(this)
-    this._handleAdditionalInputChange = this._handleAdditionalInputChange.bind(this)
+    // this._handleAdditionalInputChange = this._handleAdditionalInputChange.bind(this)
     this._submitForm = this._submitForm.bind(this)
   }
 
-  _addAdditionalInputs (event) {
-    var newInput = `input${this.state.promptResponses.length}`
-    this.setState({promptResponses: this.state.promptResponses.concat([newInput])})
-
-    const additionalTexts = this.state.promptResponseTexts
-    additionalTexts[newInput] = ''
-    this.setState({promptResponseTexts: additionalTexts})
-  }
+  // _addAdditionalInputs (event) {
+  //   var newInput = `input${this.state.promptResponses.length}`
+  //   this.setState({promptResponses: this.state.promptResponses.concat([newInput])})
+  //
+  //   const additionalTexts = this.state.promptResponseTexts
+  //   additionalTexts[newInput] = ''
+  //   this.setState({promptResponseTexts: additionalTexts})
+  // }
 
   _handleChange (event) {
     this.setState({promptText: event.target.value})
   }
 
-  _handleAdditionalInputChange (event) {
-    const additionalTexts = this.state.promptResponseTexts
-    additionalTexts[event.target.name] = event.target.value
-    this.setState({promptResponseTexts: additionalTexts})
-  }
+  // _handleAdditionalInputChange (event) {
+  //   const additionalTexts = this.state.promptResponseTexts
+  //   additionalTexts[event.target.name] = event.target.value
+  //   this.setState({promptResponseTexts: additionalTexts})
+  // }
 
   _submitForm (event) {
-    this.props.sendPrompt(this.state.promptText, this.state.promptResponseTexts)
+    // this.props.sendPrompt(this.state.promptText, this.state.promptResponseTexts)
+    this.props.sendPrompt(this.state.promptText)
     event.preventDefault()
-    this.setState({promptResponses: [], promptResponseTexts: {}, promptText: ''})
+    this.setState({ promptText: '' })
   }
 
   render () {
@@ -48,8 +49,6 @@ class SendPrompt extends Component {
         <div className="prompt-input-container">
           <form onSubmit={this._submitForm}>
             <textarea value={this.state.promptText} className="prompt-input" name="prompt" rows="5" onChange={this._handleChange}></textarea>
-            <input className="add-prompt-response" type="button" value="+ Add response options" onClick={this._addAdditionalInputs} />
-            {this.state.promptResponses.map(i => <input className="prompt-response" type="text" key={i} name={i} value={this.state.promptResponseTexts[i]} onChange={this._handleAdditionalInputChange} />)}
             <input className="prompt-submit" type="submit" value="Send" />
           </form>
         </div>
@@ -59,3 +58,6 @@ class SendPrompt extends Component {
 }
 
 export default SendPrompt
+
+// <input className="add-prompt-response" type="button" value="+ Add response options" onClick={this._addAdditionalInputs} />
+// {this.state.promptResponses.map(i => <input className="prompt-response" type="text" key={i} name={i} value={this.state.promptResponseTexts[i]} onChange={this._handleAdditionalInputChange} />)}

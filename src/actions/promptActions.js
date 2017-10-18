@@ -11,18 +11,18 @@ export function sendPrompt (prompt, promptResponses) {
       var newPromptKey = db.ref('/prompts').push().key
       var promptData = {
         prompt: prompt,
-        promptResponses: promptResponses,
         timestamp: Date.now(),
         recipients: 'all'
       }
+      // promptResponses: promptResponses,
 
       var updates = {}
       updates['/prompts/' + newPromptKey] = promptData
 
       // insert new prompt message into each message thread
+      // responseOptions: promptResponses,
       var newPromptMessage = {
         message: prompt,
-        responseOptions: promptResponses,
         senderId: 'prompt',
         timestamp: Date.now()
       }
@@ -33,12 +33,11 @@ export function sendPrompt (prompt, promptResponses) {
       allThreadsRef.on('value', async function(snapshot) {
         allThreads = snapshot.val()
         for (var thread_id in allThreads) {
-          console.log(thread_id)
-          var newThreadMsgKey = db.ref('/messages').push().key
-          console.log(newThreadMsgKey)
-          updates['/messages/' + thread_id + '/' + newThreadMsgKey] = newPromptMessage
+          if (allThreads[thread_id].isReflection === true) {
+            var newThreadMsgKey = db.ref('/messages').push().key
+            updates['/messages/' + thread_id + '/' + newThreadMsgKey] = newPromptMessage
+          }
         }
-        console.log(updates)
         await db.ref().update(updates)
         dispatch({type: types.SEND_PROMPT_SUCCESS, promptData})
       })
