@@ -40,6 +40,7 @@ class NewUser extends Component {
     return (
       <div>
         <h2>Create New User</h2>
+        <p>By default, all new users are created with the password 'pairachute'. They will be prompted to change their password in the app.</p>
         { this.state.displayMessages && <span style={{color: 'green'}}>{this.props.createUserInfo.successMessage}</span> }
         { this.state.displayMessages && <span style={{color: 'red'}}>{this.props.createUserInfo.errorMessage}</span> }
         <form onSubmit={this._handleSubmit}>
