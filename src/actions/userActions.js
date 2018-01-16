@@ -89,8 +89,8 @@ export function createPair (user1, user2, reflectionType) {
       } else {
         threadInfo.type = 'reflectionAndChat'
         threadInfo.isReflection = true
-        user1Info.threads['reflectionAndChat'] = threadKey
-        user2Info.threads['reflectionAndChat'] = threadKey
+        user1Info['threads'] = { reflectionAndChat: threadKey }
+        user2Info['threads'] = { reflectionAndChat: threadKey }
       }
 
       updates['/users/' + user1] = user1Info
